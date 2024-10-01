@@ -1,4 +1,3 @@
-import json
 import os
 from src.backend.settings_manager import get_value, set_value
 

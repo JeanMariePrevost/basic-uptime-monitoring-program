@@ -2,14 +2,21 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "runPytest",  // Task label used in the launch.json
+            "label": "runPytest",
             "type": "shell",
-            "command": "pytest",   // Command to run pytest
+            "command": "pytest",
+            "args": ["--rootdir", "."],  // Ensure rootdir is set to the current folder
+            "options": {
+                "env": {
+                    "PYTHONPATH": "${workspaceFolder}/src"
+                },
+                "cwd": "${workspaceFolder}"
+            },
             "group": {
                 "kind": "test",
                 "isDefault": true
             },
-            "problemMatcher": [],  // No problem matcher needed here
+            "problemMatcher": [],
             "presentation": {
                 "echo": true,
                 "reveal": "always",

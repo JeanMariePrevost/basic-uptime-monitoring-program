@@ -4,5 +4,5 @@
         "version": "0.1"
     },
     "logging_level": "original_value",
-    "logging_folder": "./logs"
+    "logs_directory": "./logs"
 }

@@ -34,6 +34,8 @@ The handlers then output the formatted messages to the console, file, or other d
 
 import logging
 import os
+import backend.settings_manager as settings_manager
+
 
 try:
     from colorlog import ColoredFormatter  # Optional requirement, only needed for colored console output
@@ -86,18 +88,19 @@ def _initialize_loggers():
         # If colorlog not available, use the same general formatter for console output
         color_formatter = general_formatter
 
-    # Create handlers (who print the messages to console, or log it to file)
-    console_handler = (
-        logging.StreamHandler()
-    )  # Creates a handler that outputs log messages to the standard error stream (the console here)
+    # Create the various handlers (who print the messages to console, or log it to file)
+    # This creates a handler that outputs log messages to the standard error stream (the console here)
+    console_handler = logging.StreamHandler()
 
     try:
-        os.makedirs("logs", exist_ok=True)  # Ensure logs directory exists
+        logs_directory = settings_manager.get_value("logs_directory")
+        os.makedirs(logs_directory, exist_ok=True)
     except OSError as e:
         input(f"Error creating logs directory: {e}. Press Enter to continue without logging.")
 
     try:
-        file_handler_general = logging.FileHandler("logs/general.log", encoding="utf-8")
+        general_log_path = os.path.join(logs_directory, "general.log")
+        file_handler_general = logging.FileHandler(general_log_path, encoding="utf-8")
     except IOError as e:
         input(f"Error creating general logs file: {e}. Press Enter to continue without logging general events.")
 
