@@ -1,0 +1,8 @@
+{
+    "_metadata": {
+        "description": "Application settings",
+        "version": "0.1"
+    },
+    "logging_level": "original_value",
+    "logging_folder": "./logs"
+}
