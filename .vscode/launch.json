@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Tests and Launch Main File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/bump.py",
+            "console": "integratedTerminal",
+            "preLaunchTask": "runPytest",      // Run pytest before launching the main file
+        }
+    ]
+}

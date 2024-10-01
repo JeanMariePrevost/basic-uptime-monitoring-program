@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "runPytest",  // Task label used in the launch.json
+            "type": "shell",
+            "command": "pytest",   // Command to run pytest
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": [],  // No problem matcher needed here
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated"
+            }
+        }
+    ]
+}
