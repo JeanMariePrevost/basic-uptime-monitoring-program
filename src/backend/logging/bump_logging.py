@@ -36,13 +36,15 @@ import logging
 import os
 
 try:
-    from colorlog import ColoredFormatter # Optional requirement, only needed for colored console output
+    from colorlog import ColoredFormatter  # Optional requirement, only needed for colored console output
+
     colorlog_available = True
 except ImportError:
     colorlog_available = False
 
 general_logger = None
 monitor_logger = None
+
 
 def _initialize_loggers():
     """
@@ -51,14 +53,13 @@ def _initialize_loggers():
     It creates the necessary log files and attaches appropriate handlers and formatters to the loggers.
     It is called by the module itself, no need to call it from outside.
     """
-    if(general_logger and monitor_logger):
+    if general_logger and monitor_logger:
         general_logger.warning("Loggers already initialized, are you calling _initialize_loggers() multiple times?")
         return general_logger, monitor_logger
-    
+
     new_general_logger = logging.getLogger("general")  # App-wide events logging, excluding monitor results
     new_monitor_logger = logging.getLogger("monitor_results")  # Monitor results logging only
 
-    
     new_general_logger.setLevel(logging.INFO)
     new_monitor_logger.setLevel(logging.INFO)
 
@@ -81,12 +82,14 @@ def _initialize_loggers():
             secondary_log_colors={},
             style="%",
         )
-    else:  
+    else:
         # If colorlog not available, use the same general formatter for console output
         color_formatter = general_formatter
 
     # Create handlers (who print the messages to console, or log it to file)
-    console_handler = logging.StreamHandler()  # Creates a handler that outputs log messages to the standard error stream (the console here)
+    console_handler = (
+        logging.StreamHandler()
+    )  # Creates a handler that outputs log messages to the standard error stream (the console here)
 
     try:
         os.makedirs("logs", exist_ok=True)  # Ensure logs directory exists
@@ -97,7 +100,7 @@ def _initialize_loggers():
         file_handler_general = logging.FileHandler("logs/general.log", encoding="utf-8")
     except IOError as e:
         input(f"Error creating general logs file: {e}. Press Enter to continue without logging general events.")
-    
+
     try:
         file_handler_monitor = logging.FileHandler("logs/monitors.log", encoding="utf-8")
     except IOError as e:
