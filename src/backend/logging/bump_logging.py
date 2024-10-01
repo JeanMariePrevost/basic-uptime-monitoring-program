@@ -105,7 +105,8 @@ def _initialize_loggers():
         input(f"Error creating general logs file: {e}. Press Enter to continue without logging general events.")
 
     try:
-        file_handler_monitor = logging.FileHandler("logs/monitors.log", encoding="utf-8")
+        monitor_log_path = os.path.join(logs_directory, "monitors.log")
+        file_handler_monitor = logging.FileHandler(monitor_log_path, encoding="utf-8")
     except IOError as e:
         input(f"Error creating general logs file: {e}. Press Enter to continue without logging monitor events.")
 

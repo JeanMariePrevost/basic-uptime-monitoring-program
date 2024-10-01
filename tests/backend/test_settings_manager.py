@@ -22,5 +22,5 @@ def test_set_value():
     assert get_value("logging_level") == "test_value"
 
     # set the value back to original
-    set_value("logging_level", "original_value")
-    assert get_value("logging_level") == "original_value"
+    set_value("logging_level", original_value)
+    assert get_value("logging_level") == original_value
